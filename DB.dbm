@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel>
+<schema name="public" protected="true" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<database name="ProductionControlDB">
+</database>
+
+<table name="Recipt">
+	<schema name="public"/>
+	<position x="259" y="119"/>
+	<column name="Id">
+		<type name="serial"/>
+	</column>
+	<column name="Name">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="Description">
+		<type name="text"/>
+	</column>
+	<column name="MainIngredients">
+		<type name="varchar" length="250"/>
+	</column>
+	<column name="Water">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="RECIPT_PK_ID" type="pk-constr" factor="10" table="public.&quot;Recipt&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+</dbmodel>

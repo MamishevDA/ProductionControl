@@ -15,6 +15,9 @@ public class Recipe {
     String mainIngredient;
     String description;
 
+    public Recipe(){
+        
+    }
     public Recipe(int id, String mainIngredient, String description) {
         this.id = id;
         this.mainIngredient = mainIngredient;
