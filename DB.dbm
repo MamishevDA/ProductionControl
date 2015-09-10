@@ -12,7 +12,7 @@ CAUTION: Do not modify this file unless you know what you are doing.
 
 <table name="Recipt">
 	<schema name="public"/>
-	<position x="259" y="119"/>
+	<position x="27" y="371"/>
 	<column name="Id">
 		<type name="serial"/>
 	</column>
@@ -32,5 +32,80 @@ CAUTION: Do not modify this file unless you know what you are doing.
 		<columns names="Id" ref-type="src-columns"/>
 	</constraint>
 </table>
+
+<table name="CookTechnology">
+	<schema name="public"/>
+	<position x="549" y="348"/>
+	<column name="Id">
+		<type name="serial"/>
+	</column>
+	<column name="Name">
+		<type name="varchar" length="200"/>
+	</column>
+	<column name="Description">
+		<type name="text"/>
+	</column>
+	<column name="MainTheses">
+		<type name="varchar" length="100"/>
+	</column>
+	<constraint name="CookTechnologyId_PK" type="pk-constr" factor="10" table="public.&quot;CookTechnology&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="Product">
+	<schema name="public"/>
+	<position x="316" y="56"/>
+	<column name="Id">
+		<type name="serial"/>
+	</column>
+	<column name="LeavenStartDate">
+		<type name="date"/>
+	</column>
+	<column name="LeavenEndDate">
+		<type name="date"/>
+	</column>
+	<column name="Recipt">
+		<type name="integer"/>
+	</column>
+	<column name="CookTechnology">
+		<type name="integer"/>
+	</column>
+	<column name="DistillationStartDate">
+		<type name="date"/>
+	</column>
+	<column name="DistillationEndDate">
+		<type name="date"/>
+	</column>
+	<column name="Name">
+		<type name="varchar" length="100"/>
+	</column>
+	<column name="Description">
+		<type name="text"/>
+	</column>
+	<constraint name="ProductId_PK" type="pk-constr" factor="10" table="public.&quot;Product&quot;">
+		<columns names="Id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="ProductRecipt_FK" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;Recipt&quot;" table="public.&quot;Product&quot;">
+	<columns names="Recipt" ref-type="src-columns"/>
+	<columns names="Id" ref-type="dst-columns"/>
+</constraint>
+<constraint name="ProductCookTechnology" type="fk-constr"	 comparison-type="MATCH FULL"
+	 upd-action="NO ACTION" del-action="NO ACTION" ref-table="public.&quot;CookTechnology&quot;" table="public.&quot;Product&quot;">
+	<columns names="CookTechnology" ref-type="src-columns"/>
+	<columns names="Id" ref-type="dst-columns"/>
+</constraint>
+<relationship name="&quot;rel_Product_Recipt&quot;" type="relfk"
+	 src-table="public.&quot;Product&quot;"
+	 dst-table="public.&quot;Recipt&quot;"
+	 src-required="true" dst-required="true"/>
+
+<relationship name="&quot;rel_Product_CookTechnology&quot;" type="relfk"
+	 src-table="public.&quot;Product&quot;"
+	 dst-table="public.&quot;CookTechnology&quot;"
+	 src-required="true" dst-required="true"/>
 
 </dbmodel>

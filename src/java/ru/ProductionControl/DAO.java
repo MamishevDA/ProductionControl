@@ -7,9 +7,11 @@ package ru.ProductionControl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,13 +22,14 @@ import java.util.logging.Logger;
  */
 public  class DAO {
 
-    public static Set<Recipe> recipes = new HashSet<>();
+    public static List<Recipe> recipes = new ArrayList<>();
 
     static {
 
     }
 
-    public static Set<Recipe> getRecipes(){
+    public static List<Recipe> getRecipes(){
+        recipes.clear();
         DAO.getRecips();
         return recipes;
     }
@@ -44,17 +47,18 @@ public  class DAO {
     public static void getRecips() {
         try {
             ResultSet rs = ConnectDB.getDBQuery("111");
-            Recipe recipe = new Recipe();
+            Recipe recipe;
             while (rs.next()) {
+                recipe = new Recipe();
                 recipe.setId(rs.getInt("Id"));
-                recipe.setMainIngredient("none");
+                recipe.setMainIngredient(rs.getString("Description"));
                 recipe.setDescription(rs.getString("Name"));
                 recipes.add(recipe);
                 
             }
-            recipes.add(new Recipe(11, "solod", "fine thing"));
-            recipes.add(new Recipe(2, "sahar", "76% of alcogol"));
-            recipes.add(new Recipe(3, "hmel", "like beer"));
+            recipes.add(new Recipe(11, "from DAO", "fine thing"));
+            recipes.add(new Recipe(2, "from DAO", "76% of alcogol"));
+            recipes.add(new Recipe(3, "from DAO", "like beer"));
         } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }

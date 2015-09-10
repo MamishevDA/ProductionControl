@@ -44,9 +44,11 @@ public class ConnectDB {
         PreparedStatement prstm = null;
         ResultSet rs = null;
         ResultSetMetaData rsmd = null;
-        String sql = "select t.\"Id\", t.\"Name\" from \"public\".\"Recipt\" t where t.\"Id\" = ?";
+        String sql = "select t.\"Id\", t.\"Description\", t.\"Name\" from \"ProductionControl\".\"Recipt\" t";
         prstm = ConnectDB.getConnection().prepareStatement(sql);
-        prstm.setInt(1, 1);
+//        String sql = "select t.\"Id\", t.\"Name\" from \"ProductionControl\".\"Recipt\" t where t.\"Id\" = ?";
+//        prstm = ConnectDB.getConnection().prepareStatement(sql);
+//        prstm.setInt(1, 1);
 
         rs = prstm.executeQuery();
 
