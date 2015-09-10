@@ -56,9 +56,7 @@ public  class DAO {
                 recipes.add(recipe);
                 
             }
-            recipes.add(new Recipe(11, "from DAO", "fine thing"));
             recipes.add(new Recipe(2, "from DAO", "76% of alcogol"));
-            recipes.add(new Recipe(3, "from DAO", "like beer"));
         } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }

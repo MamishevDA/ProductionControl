@@ -38,8 +38,8 @@
                 </c:forEach>
             
             </table>
-            <button  style="margin-top: 10px; margin-left: 20px" onClick='location.href="addRecipe"' >ADD</button>
-            <button style="display: block; margin-left: auto; margin-right: auto;">Add</button>
+            <button  style="margin-top: 10px; margin-left: 20px" onClick='location.href="addRecipe"' >добавить новый рецепт</button>
+            
         </div>
     </body>
 </html>
