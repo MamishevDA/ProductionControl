@@ -60,8 +60,10 @@ public class addRecipe extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-        request.getRequestDispatcher("WEB-INF/addRecipe.jsp").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
+         request.getRequestDispatcher("WEB-INF/addRecipe.jsp").forward(request, response);
+        //request.getRequestDispatcher("WEB-INF/shapka.html").forward(request, response);
     }
 
     /**

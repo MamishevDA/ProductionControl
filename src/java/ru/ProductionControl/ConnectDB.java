@@ -49,16 +49,29 @@ public class ConnectDB {
 //        String sql = "select t.\"Id\", t.\"Name\" from \"ProductionControl\".\"Recipt\" t where t.\"Id\" = ?";
 //        prstm = ConnectDB.getConnection().prepareStatement(sql);
 //        prstm.setInt(1, 1);
-
         rs = prstm.executeQuery();
 
         return rs;
     }
+    
+    public static boolean addRecipt(String name, String descr){
+        try {
+            PreparedStatement prstm = null;
+            String sql = "INSERT INTO \"ProductionControl\".\"Recipt\" (\"Name\", \"Description\", \"MainIngredients\", \"Water\") \n" +
+"	VALUES (?, ?, NULL, NULL)";
+            prstm = ConnectDB.getConnection().prepareStatement(sql);
+            prstm.setString(1, name);
+            prstm.setString(2, descr);
+            prstm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        return true;
+    }
 
     public static void main(String args[]) throws SQLException {
-
         ResultSet rs = ConnectDB.getDBQuery("111");
-
         while (rs.next()) {
             System.out.println(rs.getInt("Id")
                     + rs.getString("Name"));

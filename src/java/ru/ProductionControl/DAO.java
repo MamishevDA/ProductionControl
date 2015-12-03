@@ -56,7 +56,7 @@ public  class DAO {
                 recipes.add(recipe);
                 
             }
-            recipes.add(new Recipe(2, "from DAO", "76% of alcogol"));
+            recipes.add(new Recipe(66, "not from DB", "76% of alcogol"));
         } catch (SQLException ex) {
             Logger.getLogger(DAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,8 +66,11 @@ public  class DAO {
         //ConnectDB.getConnection()
     }
 
-    public static void insertRecipe(String a, String b) {
+    public static boolean insertRecipe(String a, String b) {
+        boolean isInserted = false;
         recipes.add(new Recipe(recipes.size() + 1, a, b));
+        isInserted = ConnectDB.addRecipt(a, b);
+        return isInserted;
     }
     public static void main(String... ewe){
         DAO.getRecips();

@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dmitriy.mamishev
  */
-@WebServlet(name = "MyServlet", urlPatterns = {"/recipe"})
-public class MyServlet extends HttpServlet {
+@WebServlet(name = "confirmPageServlet", urlPatterns = {"/confirmPage"})
+public class confirmPageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +32,17 @@ public class MyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MyServlet</title>");            
+            out.println("<title>Servlet confirmPageServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MyServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet confirmPageServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,11 +60,46 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-        //String str = request.getParameter("id");
-       // response.getOutputStream().write(("this is "+str +" respounse").getBytes());
-        request.setAttribute("recipes", DAO.getRecipes());
-        request.getRequestDispatcher("WEB-INF/recipe.jsp").forward(request, response);
+        //request.getRequestDispatcher("WEB-INF/confirmPage.jsp").forward(request, response);
+
+        
+        boolean isInserted = DAO.insertRecipe(request.getParameter("Name"), request.getParameter("Description"));
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        String str;
+    str =   "<table border=\"1\">\n" +
+"        <thead>\n" +
+"            <tr>\n" +
+"                <th>Name</th>\n" +
+"                <th>Description</th>\n" +
+"                <th>MainIngredients</th>\n" +
+"            </tr>\n" +
+"        </thead>\n" +
+"        <tbody>\n" +
+"            <tr>\n" +
+"                <td>"+ request.getParameter("Name")+"</td>\n" +
+"                <td>"+ request.getParameter("Description")+"</td>\n" +
+"                <td>"+ request.getParameter("MainIngredients")+"</td>\n" +
+"            </tr>\n" +
+"        </tbody>\n" +
+"    </table>\n";
+         //accept-charset="UTF-8"
+ response.getWriter().println("<!DOCTYPE HTML>"
+         + "<html>"
+         + "<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
+         + "<body><form action=\"recipe\"method=\"POST\">"
+         + "<h3>Ваши данные:</h3>"
+         + "<p>" + str + "</p>"
+         + "<p>добавлены? "
+         + isInserted
+         + "</p>"
+         +"<input type=\"submit\" value=\"на начальную страницу\"/> "
+         + "</form>"
+         + "</body>"
+         + "</html>");
+ 
+    
+
     }
 
     /**
@@ -77,8 +113,10 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //request.getRequestDispatcher("WEB-INF/confirmPage.jsp").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
         doGet(request, response);
-       
     }
 
     /**

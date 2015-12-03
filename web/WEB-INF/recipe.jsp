@@ -7,12 +7,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="confirmPage.jsp" flush="true" />
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>рецепты</title>
     </head>
-
     <style>
         table {
             border-collapse: collapse;
@@ -26,6 +27,7 @@
     </style>
 
     <body>
+
         <div style="width: 400px;">
             <h1>Hello World!</h1>
             <table border="1">
@@ -36,10 +38,9 @@
                         <td>${recipe.description}</td>
                     </tr>
                 </c:forEach>
-            
+
             </table>
-            <button  style="margin-top: 10px; margin-left: 20px" onClick='location.href="addRecipe"' >добавить новый рецепт</button>
-            
+            <button  style="margin-top: 10px; margin-left: 20px" onClick='location.href = "addRecipe"' >добавить новый рецепт</button>
         </div>
     </body>
 </html>

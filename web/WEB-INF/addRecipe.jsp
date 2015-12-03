@@ -5,10 +5,13 @@
     Author     : dmitriy.mamishev
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%-- <jsp:include page="confirmPage.jsp" flush="true" /> --%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta charset="UTF-8"/>
+        
         <title>добавить рецепт</title>
     </head>
     <style>
@@ -17,20 +20,23 @@
         }
     </style>
     <body>
-        <div class ="main">
-            <h3>введите данные рецепта:</h3>
+        <form action="confirmPage"
+              method="POST" accept-charset="UTF-8">
+            <div class ="main">
+                <h3>введите данные рецепта:</h3>
 
-            <div>
-                <p>
-                    name<br>
-                    <input type="text" autofocus="" name="Name" value="" /><br>
-                    Description<br>
-                    <input type="text" name="Description" value="" /><br>
-                    MainIngredients<br>
-                    <input type="text" name="MainIngredients" value="" /><br>
-                </p>
+                <div>
+                    <p>
+                        name<br>
+                        <input type="text" autofocus="" name="Name" value="" /><br>
+                        Description<br>
+                        <input type="text" name="Description" value="" /><br>
+                        MainIngredients<br>
+                        <input type="text" name="MainIngredients" value="" /><br>
+                    </p>
+                </div>
+                <input type="submit" value="addNewRecipe"/>
             </div>
-            <input type="submit" value="addNewRecipe"/>
-        </div>
+        </form>
     </body>
 </html>
