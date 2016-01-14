@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ru.ProductionControl;
 
 import java.io.IOException;
@@ -32,14 +31,14 @@ public class confirmPageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         request.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet confirmPageServlet</title>");            
+            out.println("<title>Servlet confirmPageServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet confirmPageServlet at " + request.getContextPath() + "</h1>");
@@ -61,44 +60,56 @@ public class confirmPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //request.getRequestDispatcher("WEB-INF/confirmPage.jsp").forward(request, response);
-
+        String name = request.getParameter("Name").trim();
+        String description = request.getParameter("Description").trim();
+        String mainIngredients = request.getParameter("MainIngredients").trim();
         
-        boolean isInserted = DAO.insertRecipe(request.getParameter("Name"), request.getParameter("Description"));
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        String str;
-    str =   "<table border=\"1\">\n" +
-"        <thead>\n" +
-"            <tr>\n" +
-"                <th>Name</th>\n" +
-"                <th>Description</th>\n" +
-"                <th>MainIngredients</th>\n" +
-"            </tr>\n" +
-"        </thead>\n" +
-"        <tbody>\n" +
-"            <tr>\n" +
-"                <td>"+ request.getParameter("Name")+"</td>\n" +
-"                <td>"+ request.getParameter("Description")+"</td>\n" +
-"                <td>"+ request.getParameter("MainIngredients")+"</td>\n" +
-"            </tr>\n" +
-"        </tbody>\n" +
-"    </table>\n";
-         //accept-charset="UTF-8"
- response.getWriter().println("<!DOCTYPE HTML>"
-         + "<html>"
-         + "<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
-         + "<body><form action=\"recipe\"method=\"POST\">"
-         + "<h3>Ваши данные:</h3>"
-         + "<p>" + str + "</p>"
-         + "<p>добавлены? "
-         + isInserted
-         + "</p>"
-         +"<input type=\"submit\" value=\"на начальную страницу\"/> "
-         + "</form>"
-         + "</body>"
-         + "</html>");
- 
-    
+        if (!name.isEmpty() || !description.isEmpty()) {
+            boolean isInserted = DAO.insertRecipe(name, description);
+            request.setCharacterEncoding("UTF-8");
+            response.setContentType("text/html;charset=UTF-8");
+            String str;
+            str = "<table border=\"1\">\n"
+                    + "        <thead>\n"
+                    + "            <tr>\n"
+                    + "                <th>Name</th>\n"
+                    + "                <th>Description</th>\n"
+                    + "                <th>MainIngredients</th>\n"
+                    + "            </tr>\n"
+                    + "        </thead>\n"
+                    + "        <tbody>\n"
+                    + "            <tr>\n"
+                    + "                <td>" + name + "</td>\n"
+                    + "                <td>" + description + "</td>\n"
+                    + "                <td>" + mainIngredients + "</td>\n"
+                    + "            </tr>\n"
+                    + "        </tbody>\n"
+                    + "    </table>\n";
+            //accept-charset="UTF-8"
+            response.getWriter().println("<!DOCTYPE HTML>"
+                    + "<html>"
+                    + "<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
+                    + "<body><form action=\"recipe\"method=\"POST\">"
+                    + "<h3>Ваши данные:</h3>"
+                    + "<p>" + str + "</p>"
+                    + "<p>добавлены? "
+                    + isInserted
+                    + "</p>"
+                    + "<input type=\"submit\" value=\"на начальную страницу\"/> "
+                    + "</form>"
+                    + "</body>"
+                    + "</html>");
+        } else{
+            response.getWriter().println("<!DOCTYPE HTML>"
+                    + "<html>"
+                    + "<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
+                    + "<body><form action=\"recipe\"method=\"POST\">"
+                    + "<h3>Данные не введены!</h3>"
+                    + "<input type=\"submit\" value=\"на начальную страницу\"/> "
+                    + "</form>"
+                    + "</body>"
+                    + "</html>");
+        }
 
     }
 
