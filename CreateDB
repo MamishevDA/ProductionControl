@@ -1,0 +1,108 @@
+-- Database generated with pgModeler (PostgreSQL Database Modeler).
+-- PostgreSQL version: 9.2
+-- Project Site: pgmodeler.com.br
+-- Model Author: ---
+
+SET check_function_bodies = false;
+-- ddl-end --
+
+
+-- Database creation must be done outside an multicommand file.
+-- These commands were put in this file only for convenience.
+-- -- object: new_database | type: DATABASE --
+-- CREATE DATABASE new_database
+-- ;
+-- -- ddl-end --
+-- 
+
+-- object: public."Fermentation" | type: TABLE --
+CREATE TABLE public."Fermentation"(
+	"Id" serial,
+	"Name" varchar(250),
+	"Description" varchar(1000),
+	"Yeast" varchar(200),
+	"FermentationTemp" integer,
+	"StartFermentationDate" date,
+	"EndFermentationDate" date,
+	"Alcohol" integer,
+	CONSTRAINT "Fermentation_PK" PRIMARY KEY ("Id")
+
+);
+-- ddl-end --
+COMMENT ON TABLE public."Fermentation" IS 'Брожение';
+-- ddl-end --
+-- ddl-end --
+
+-- object: public."Distillation" | type: TABLE --
+CREATE TABLE public."Distillation"(
+	"Id" serial,
+	"Name" varchar(250),
+	"Description" varchar(1000),
+	"DistillationDate" date,
+	t1 integer,
+	"alcoholT1" integer,
+	t2 integer,
+	"alcoholT2" integer,
+	CONSTRAINT "Distillation_PK" PRIMARY KEY ("Id")
+
+);
+-- ddl-end --
+COMMENT ON TABLE public."Distillation" IS 'Перегонка';
+-- ddl-end --
+-- ddl-end --
+
+-- object: public."Product" | type: TABLE --
+CREATE TABLE public."Product"(
+	"Id" serial,
+	"Name" varchar(250),
+	"Description" varchar(1000),
+	"Classification" varchar(50),
+	"DateCook" date,
+	"IdRecipe" integer,
+	"IdFermentation" integer,
+	"IdDistillation" integer,
+	"RatingCurrentDistillation" integer,
+	"StartInfusionDate" date,
+	"EndInfusionDate" date,
+	"RatingEndProduct" integer,
+	"DescriptionEndProduct" varchar(1000),
+	CONSTRAINT "Product_PK" PRIMARY KEY ("Id")
+
+);
+-- ddl-end --
+-- object: public."Recipe" | type: TABLE --
+CREATE TABLE public."Recipe"(
+	"Id" serial,
+	"Name" varchar(250),
+	"Description" varchar(1000),
+	"MainIngredient" varchar(250),
+	CONSTRAINT "Recipe_PK" PRIMARY KEY ("Id")
+
+);
+-- ddl-end --
+COMMENT ON TABLE public."Recipe" IS 'Рецепт';
+-- ddl-end --
+-- ddl-end --
+
+-- object: "IdRecipe_FK" | type: CONSTRAINT --
+ALTER TABLE public."Product" ADD CONSTRAINT "IdRecipe_FK" FOREIGN KEY ("IdRecipe")
+REFERENCES public."Recipe" ("Id") MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
+-- ddl-end --
+
+
+-- object: "IdFermentation_FK" | type: CONSTRAINT --
+ALTER TABLE public."Product" ADD CONSTRAINT "IdFermentation_FK" FOREIGN KEY ("IdFermentation")
+REFERENCES public."Fermentation" ("Id") MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
+-- ddl-end --
+
+
+-- object: "IdDistillation_FK" | type: CONSTRAINT --
+ALTER TABLE public."Product" ADD CONSTRAINT "IdDistillation_FK" FOREIGN KEY ("IdDistillation")
+REFERENCES public."Distillation" ("Id") MATCH FULL
+ON DELETE NO ACTION ON UPDATE NO ACTION NOT DEFERRABLE;
+-- ddl-end --
+
+
+
