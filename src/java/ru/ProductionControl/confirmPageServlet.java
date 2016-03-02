@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dmitriy.mamishev
  */
-@WebServlet(name = "confirmPageServlet", urlPatterns = {"/confirmPage"})
-public class confirmPageServlet extends HttpServlet {
+@WebServlet(name = "ConfirmPageServlet", urlPatterns = {"/confirmPage"})
+public class ConfirmPageServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,20 +31,6 @@ public class confirmPageServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet confirmPageServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet confirmPageServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,14 +46,18 @@ public class confirmPageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //request.getRequestDispatcher("WEB-INF/confirmPage.jsp").forward(request, response);
-        String name = request.getParameter("Name").trim();
-        String description = request.getParameter("Description").trim();
-        String mainIngredients = request.getParameter("MainIngredients").trim();
-        
-        if (!name.isEmpty() || !description.isEmpty()) {
-            boolean isInserted = DAO.insertRecipe(name, description);
-            request.setCharacterEncoding("UTF-8");
-            response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+        if (!request.getParameter("Name").trim().isEmpty() && !request.getParameter("Description").trim().isEmpty()) {
+            Recipe recipe = new Recipe();
+            recipe.setName(request.getParameter("Name").trim());
+            recipe.setDescription(request.getParameter("Description").trim());
+            recipe.setMainIngredient(request.getParameter("MainIngredients").trim());
+//        String name = request.getParameter("Name").trim();
+//        String description = request.getParameter("Description").trim();
+//        String mainIngredients = request.getParameter("MainIngredients").trim();
+
+            boolean isInserted = DAO.insertRecipe(recipe);
             String str;
             str = "<table border=\"1\">\n"
                     + "        <thead>\n"
@@ -79,9 +69,9 @@ public class confirmPageServlet extends HttpServlet {
                     + "        </thead>\n"
                     + "        <tbody>\n"
                     + "            <tr>\n"
-                    + "                <td>" + name + "</td>\n"
-                    + "                <td>" + description + "</td>\n"
-                    + "                <td>" + mainIngredients + "</td>\n"
+                    + "                <td>" + recipe.getName() + "</td>\n"
+                    + "                <td>" + recipe.getDescription() + "</td>\n"
+                    + "                <td>" + recipe.getMainIngredient() + "</td>\n"
                     + "            </tr>\n"
                     + "        </tbody>\n"
                     + "    </table>\n";
@@ -99,7 +89,8 @@ public class confirmPageServlet extends HttpServlet {
                     + "</form>"
                     + "</body>"
                     + "</html>");
-        } else{
+        } else {
+
             response.getWriter().println("<!DOCTYPE HTML>"
                     + "<html>"
                     + "<head><meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\"></head>"
