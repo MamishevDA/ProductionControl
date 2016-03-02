@@ -92,8 +92,7 @@ public class Product implements Serializable {
     }
 
     public Product(ResultSet rs) throws SQLException {
-
-        if (rs.getInt("Id") > 0) {
+        if (this.id != null) {
             this.id = rs.getInt("Id");
             this.name = rs.getString("Name");
             this.description = rs.getString("Description");

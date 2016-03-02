@@ -26,7 +26,7 @@
 
         <div id="content">
             <form action="confirmPage"
-                  method="POST" accept-charset="UTF-8">
+                  method="GET" accept-charset="UTF-8">
                 <div class ="main">
                     <p class="head">введите данные рецепта:</p>
                     <div>
