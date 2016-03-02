@@ -5,38 +5,49 @@
     Author     : dmitriy.mamishev
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%-- <jsp:include page="confirmPage.jsp" flush="true" /> --%>
+
+<%-- <jsp:include page="headerPage.jsp" flush="true" /> --%>
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="css/style.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta charset="UTF-8"/>
-        
+
         <title>добавить рецепт</title>
     </head>
-    <style>
-        div.main {
-            padding-left: 10px;
-        }
-    </style>
     <body>
-        <form action="confirmPage"
-              method="POST" accept-charset="UTF-8">
-            <div class ="main">
-                <h3>введите данные рецепта:</h3>
+        <div id="header">
+            <jsp:include page="headerPage.jsp" flush="true"/> 
+        </div>
+        <div id="menu">
+            <jsp:include page="leftPage.jsp" flush="true"/> 
+        </div>
 
-                <div>
-                    <p>
-                        name<br>
-                        <input type="text" autofocus="" name="Name" value="" /><br>
-                        Description<br>
-                        <input type="text" name="Description" value="" /><br>
-                        MainIngredients<br>
-                        <input type="text" name="MainIngredients" value="" /><br>
-                    </p>
+        <div id="content">
+            <form action="confirmPage"
+                  method="GET" accept-charset="UTF-8">
+                <div class ="main">
+                    <p class="head">введите данные рецепта:</p>
+                    <div>
+                        <div class="list">
+                            Название рецепта<br>
+                            <input type="text" autofocus="" name="Name" value="" /><br>
+                            Описание<br>
+                            <input type="text" name="Description" value="" /><br>
+                            Основные ингридиенты<br>
+                            <input type="text" name="MainIngredients" value="" /><br>
+                        </div>
+                    </div>
+                    <input type="submit" value="Добавить новый рецепт"/>
                 </div>
-                <input type="submit" value="addNewRecipe"/>
+            </form></div>
+        <div id="footer">
+            <div class="link">
+                Перейти <a href="recipe" >на главную</a> страницу
             </div>
-        </form>
+        </div>
     </body>
+
+
 </html>

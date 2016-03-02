@@ -21,7 +21,7 @@ public class ConnectDB {
 
     private static Connection connect = null;
 
-    public static Connection getConnection() {
+    private static Connection getConnection() {
         try {
             if (connect == null) {
                 Class.forName("org.postgresql.Driver").newInstance();
@@ -40,11 +40,11 @@ public class ConnectDB {
         return connect;
     }
 
-    public static ResultSet getDBQuery(String str) throws SQLException {
+    public static ResultSet getDBQuery(String sql) throws SQLException {
         PreparedStatement prstm = null;
         ResultSet rs = null;
         ResultSetMetaData rsmd = null;
-        String sql = "select t.\"Id\", t.\"Description\", t.\"Name\" from \"ProductionControl\".\"Recipt\" t";
+        //String sql = "select t.\"Id\", t.\"Description\", t.\"Name\" from \"ProductionControl\".\"Recipe\" t";
         prstm = ConnectDB.getConnection().prepareStatement(sql);
 //        String sql = "select t.\"Id\", t.\"Name\" from \"ProductionControl\".\"Recipt\" t where t.\"Id\" = ?";
 //        prstm = ConnectDB.getConnection().prepareStatement(sql);
@@ -54,14 +54,15 @@ public class ConnectDB {
         return rs;
     }
     
-    public static boolean addRecipt(String name, String descr){
+    public static boolean addRecipt(Recipe recipe){
         try {
             PreparedStatement prstm = null;
-            String sql = "INSERT INTO \"ProductionControl\".\"Recipt\" (\"Name\", \"Description\", \"MainIngredients\", \"Water\") \n" +
-"	VALUES (?, ?, NULL, NULL)";
+            String sql = "INSERT INTO \"ProductionControl\".\"Recipe\" (\"Name\", \"Description\", \"MainIngredient\") \n" +
+"	VALUES (?, ?, ?)";
             prstm = ConnectDB.getConnection().prepareStatement(sql);
-            prstm.setString(1, name);
-            prstm.setString(2, descr);
+            prstm.setString(1, recipe.getName());
+            prstm.setString(2, recipe.getDescription());
+            prstm.setString(3, recipe.getMainIngredient());
             prstm.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(ConnectDB.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,6 +77,7 @@ public class ConnectDB {
             System.out.println(rs.getInt("Id")
                     + rs.getString("Name"));
         }
+      //  System.out.print(ConnectDB.addRecipt("some", "one"));
     }
 
 }

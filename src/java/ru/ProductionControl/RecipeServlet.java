@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package ru.ProductionControl;
 
 import java.io.IOException;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dmitriy.mamishev
  */
-@WebServlet(name = "addRecipe", urlPatterns = {"/addRecipe"})
-public class addRecipe extends HttpServlet {
+@WebServlet(name = "RecipeServlet", urlPatterns = {"/recipe"})
+public class RecipeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,11 +37,10 @@ public class addRecipe extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet addRecipe</title>");            
+            out.println("<title>Servlet MyServlet</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet addRecipe at " + request.getRemoteUser() + "</h1>");
-           // request.getRemoteUser()
+            out.println("<h1>Servlet MyServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,10 +58,13 @@ public class addRecipe extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-         response.setContentType("text/html;charset=UTF-8");
-         request.getRequestDispatcher("WEB-INF/addRecipe.jsp").forward(request, response);
-        //request.getRequestDispatcher("WEB-INF/shapka.html").forward(request, response);
+       // processRequest(request, response);
+        //String str = request.getParameter("id");
+        // response.getOutputStream().write(("this is "+str +" respounse").getBytes());
+        request.setAttribute("recipes", DAO.getRecipes());
+        request.setAttribute("colNames", DAO.columnName);
+        request.setAttribute("obj", new Test());
+        request.getRequestDispatcher("WEB-INF/recipe.jsp").forward(request, response);
     }
 
     /**
@@ -77,7 +78,8 @@ public class addRecipe extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        doGet(request, response);
+
     }
 
     /**

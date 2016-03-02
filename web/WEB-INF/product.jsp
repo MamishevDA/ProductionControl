@@ -25,22 +25,28 @@
         <div id="menu">
             <jsp:include page="leftPage.jsp" flush="true"/> 
         </div>
-    
+        
         <div id="content">Контент
             <table class="mainList" border="1">
                 <tr>
                     <c:forEach items="${colNames}" var="cols">
-                        <td><b>${cols}</b></td>
+                        <td> <b> ${cols}</b></td>
                     </c:forEach>
                 </tr>
-                <c:forEach items="${requestScope.recipes}" var="recipe">
+                <c:forEach items="${requestScope.products}" var="product">
+
                     <tr>
                         <%--неявно вызывает геттеры у объекта по имени метода)--%>
-                        <td>${recipe.getId()}</td>
-                        <td>${recipe.name}</td>
-                        <td>${recipe.description}</td>
-                        <td>${recipe.mainIngredient}</td>
-
+                        <td>${product.id}</td>
+                        <td>${product.name}</td>
+                        <td>${product.description}</td>
+                        <td>${product.classification}</td>
+                        <td>${product.dateCook}</td>
+                        <td>${product.ratingCurrentDistillation}</td>
+                        <td>${product.startInfusionDate}</td>
+                        <td>${product.endInfusionDate}</td>
+                        <td>${product.ratingEndProduct}</td>
+                        <td>${product.descriptionEndProduct}</td>
                     </tr>
                 </c:forEach>
 
