@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dmitriy.mamishev
  */
-@WebServlet(name = "MyServlet", urlPatterns = {"/recipe"})
-public class MyServlet extends HttpServlet {
+@WebServlet(name = "AddRecipeServlet", urlPatterns = {"/addRecipe"})
+public class AddRecipeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +38,11 @@ public class MyServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet MyServlet</title>");            
+            out.println("<title>Servlet addRecipe</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet MyServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet addRecipe at " + request.getRemoteUser() + "</h1>");
+           // request.getRemoteUser()
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,11 +60,10 @@ public class MyServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       // processRequest(request, response);
-        //String str = request.getParameter("id");
-       // response.getOutputStream().write(("this is "+str +" respounse").getBytes());
-        request.setAttribute("recipes", DAO.getRecipes());
-        request.getRequestDispatcher("WEB-INF/recipe.jsp").forward(request, response);
+        request.setCharacterEncoding("UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
+         request.getRequestDispatcher("WEB-INF/addRecipe.jsp").forward(request, response);
+        //request.getRequestDispatcher("WEB-INF/shapka.html").forward(request, response);
     }
 
     /**
@@ -78,7 +78,6 @@ public class MyServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-       
     }
 
     /**

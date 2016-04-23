@@ -1,0 +1,58 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 11, 2016, 11:42:35 AM
+    Author     : dmitriy.mamishev
+*/
+
+body {
+    color: #000; /* цвет текста на странице */
+    background: #fff; /* фон */
+    margin: 0; /* обнуление полей */
+}
+#header {
+    height: auto; /* высота шапки */
+    background: #fc0; /* фон */
+}
+#menu {
+    width: 13%; /* ширина меню */
+    height: 300px; /* высота */
+    background: #0fc; /* фон */
+    float: left; /* всплытие влево */
+}
+
+#content {
+    height:300px; /* высота контента */
+    background: #eee; /* фон */
+    margin:inherit; /* боковые поля */
+}
+#footer {
+    height: 50px; /* высота футера */
+    color: #FFFFFF; /* цвет текста */
+    background: #31B404; /* фон */
+    clear: both; /* прерывание обтекания */
+}
+.link {
+    // background-color: white;
+    color: #eee; 
+}
+a:visited {
+    color: #c0f;
+}
+a:active {
+    color: aqua; 
+}
+table.mainList{
+    width: 85%;
+    margin: auto;
+}
+p.head{
+    margin:0;
+}
+div.list{
+    margin:15px;
+}
+

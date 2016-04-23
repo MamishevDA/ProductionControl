@@ -1,0 +1,48 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+ <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>seodon.ru - Три колонки резиновой ширины</title>
+  <style type="text/css">
+   body {
+    color: #000; /* цвет текста на странице */
+    background: #fff; /* фон */
+    margin: 0; /* обнуление полей */
+   }
+   #header {
+    height: 100px; /* высота шапки */
+    background: #fc0; /* фон */
+   }
+   #menu {
+    width: 25%; /* ширина меню */
+    height: 300px; /* высота */
+    background: #0fc; /* фон */
+    float: left; /* всплытие влево */
+   }
+   #sidebar {
+    width: 20%; /* ширина сайдбара */
+    height: 300px; /* высота */
+    background: #c0f; /* фон */
+    float: right; /* всплытие вправо */
+   }
+   #content {
+    height: 300px; /* высота контента */
+    background: #eee; /* фон */
+    margin: 0 20% 0 25%; /* боковые поля */
+   }
+   #footer {
+    height: 50px; /* высота футера */
+    color: #fff; /* цвет текста */
+    background: #000; /* фон */
+    clear: both; /* прерывание обтекания */
+   }
+  </style>
+ </head>
+ <body>
+   <div id="header">Шапка</div>
+   <div id="menu">Меню</div>
+   <div id="sidebar">Сайдбар</div>
+   <div id="content">Контент</div>
+   <div id="footer">Футер</div>
+ </body>
+</html>
